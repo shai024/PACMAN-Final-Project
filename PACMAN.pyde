@@ -4,7 +4,7 @@ minim = Minim(this)
 def setup():
     player = minim.loadFile("Super Mario Bros. Soundtrack (1).mp3")
     player.play()
-    size(700,700) 
+    size(800,700) 
     
     x = 35
     y = 35
@@ -16,6 +16,8 @@ def setup():
     global y
     global balls
     global i
+    gameended = True
+    global gameended
 
     
     i=1
@@ -83,26 +85,176 @@ def draw():
     background(0,0,0)
     global speed
     global directiony
+    global gameended
     
-    gameBoard()
-    pacMan(x,y)
+ 
+    if gameended == True:
+        startScreen()
+        if key == ENTER:
+            gameended = False
+ 
+    if gameended == False:
+        gameBoard()
+        
+        pacMan(x,y)
     
-    global ghosts   
-    for character in ghosts:
+        global ghosts   
+        for character in ghosts:
     
-        getMovesGhost(character["a"],character["b"])
-        nextdirection = getNextDirection(character)
-        if nextdirection == "left":
-            character["a"] = character["a"] - speed
-        if nextdirection == "right":
-            character["a"] = character["a"] + speed
-        if nextdirection == "up":
-            character["b"] = character["b"] - directiony
-        if nextdirection == "down":
-            character["b"] = character["b"] + directiony 
+            getMovesGhost(character["a"],character["b"])
+            nextdirection = getNextDirection(character)
+            if nextdirection == "left":
+                character["a"] = character["a"] - speed
+            if nextdirection == "right":
+                character["a"] = character["a"] + speed
+            if nextdirection == "up":
+                character["b"] = character["b"] - directiony
+            if nextdirection == "down":
+                character["b"] = character["b"] + directiony 
             
-        ghost(character["r"],character["g"],character["bl"],character["a"],character["b"])
+            ghost(character["r"],character["g"],character["bl"],character["a"],character["b"])
+            
+def GameOverScreen():
+    background(0)
+    stroke(0,random(255),random(255))
+    strokeWeight(5)
+    #letter n
+    stroke(255)
+    line(45,150,45,260)
+    line(55,150,55,260)
+    line(45,150,55,150)
+    line(45,260,55,260)
+    line(55,150,80,260)
+    line(80,150,80,260)
+    line(90,150,90,260)
+    line(80,150,90,150)
+    line(80,260,90,260)
+    #letter O
+    stroke(0)
+    ellipse(135,260,60,100)
+    #letter S
+    #noFill()
+    fill(0,random(255),random(255))
+    stroke(255)
+    bezier(245,150,175,175,255, 235, 170, 245)
+    #letter T
+    line(260,150,340,150)
+    line(260,160,340,160)
+    line(260,150,260,160)
+    line(340,150,340,160)
+    line(305,165,305,255)
+    line(295,165,295,255)
+    line(295,165,295,255)
+    line(295,255,305,255)
+    # letter A
+    stroke(0,random(255),random(255))
+    line(390,150,350,255)
+    line(390,150,420,255)
+    #line(39
+    #letter L
+    stroke(255)
+    line(450,150,450,255)
+    line(450,255,500,255)
+    line(500,235,500,255)
+    #letterG
+    bezier(575, 150, 500, 150, 500, 255, 575, 255)
+    line(575,255,575,217)
+    line(575,217,555,217)
+    #letter I
+    line(605,150,685,150)
+    line(605,160,685,160)
+    line(605,150,605,160)
+    line(685,150,685,160)
+    line(645,160,645,245)
+    line(605,245,685,245)
+    line(605,255,685,255)
+    line(605,245,605,255)
+    line(685,245,685,255)
+    #letter A
+    stroke(0,random(255),random(255))
+    line(735,150,700,255)
+    line(735,150,770,255)
+    
+    #endgamebutton
+    textSize(30)
+    fill(0,random(255),random(255))
+    text("Game Over", 264, 570)
 
+
+def startScreen():
+    background(255)
+    
+    stroke(0,random(255),random(255))
+    strokeWeight(5)
+    #letter n
+    stroke(0)
+    line(45,150,45,260)
+    line(55,150,55,260)
+    line(45,150,55,150)
+    line(45,260,55,260)
+    line(55,150,80,260)
+    line(80,150,80,260)
+    line(90,150,90,260)
+    line(80,150,90,150)
+    line(80,260,90,260)
+    #letter O
+    stroke(0)
+    ellipse(135,260,60,100)
+    #letter S
+    #noFill()
+    stroke(255, 102, 0)
+    stroke(0, 0, 0)
+    bezier(245,150,175,175,255, 235, 170, 245)
+    #letter T
+    line(260,150,340,150)
+    line(260,160,340,160)
+    line(260,150,260,160)
+    line(340,150,340,160)
+    line(305,165,305,255)
+    line(295,165,295,255)
+    line(295,165,295,255)
+    line(295,255,305,255)
+    # letter A
+    stroke(0,random(255),random(255))
+    line(390,150,350,255)
+    line(390,150,420,255)
+    #line(39
+    #letter L
+    stroke(0)
+    line(450,150,450,255)
+    line(450,255,500,255)
+    line(500,235,500,255)
+    #letterG
+    bezier(575, 150, 500, 150, 500, 255, 575, 255)
+    line(575,255,575,217)
+    line(575,217,555,217)
+    #letter I
+    line(605,150,685,150)
+    line(605,160,685,160)
+    line(605,150,605,160)
+    line(685,150,685,160)
+    line(645,160,645,245)
+    line(605,245,685,245)
+    line(605,255,685,255)
+    line(605,245,605,255)
+    line(685,245,685,255)
+    #letter A
+    stroke(0,random(255),random(255))
+    
+    stroke(0)
+    line(735,150,700,255)
+    line(735,150,770,255)
+    line(302,565,302,590)
+    line(302,565,462,565)
+    line(462,565,462,590)
+    line(302,590,462,590)
+    
+    
+    #start game button
+    textSize(30)
+    fill(0,random(255),random(255))
+    text("Start Game",305,590)
+    
     
 def gameBoard():
     background(0,0,0)
@@ -279,8 +431,16 @@ def gameBoard():
         if balls[ball][2]==True:
             gameended=False
             
+    for character in ghosts: 
+        if abs(x - character["a"]) <= 5 and abs(y - character["b"]) <= 5:
+            gameended=True
+        
     if gameended== True:
         print ('game over')
+        noLoop()
+        
+    
+
 
         
     
@@ -460,7 +620,7 @@ def getMoves(x,y): #produces a list of possible moves based on PAC-MAN's positio
         right = False
     if x == 385 and ((y > 385 and y < 525) or (y > 525 and y < 665)):
         right = False
-    if x == 445 and (y >= 315):
+    if x == 455 and (y == 315):
         right = False
     if x == 525 and ((y > 175 and y < 385) or (y > 385 and y < 455) or (y > 455 and y <595) or (y > 595 and y < 665)) :
         right = False
@@ -598,6 +758,8 @@ def getMovesGhost(a,b): #produces a list of possible moves based on the position
     if a == 375 and ((b > 175 and b < 315) or (b > 315 and b < 385)) :
         right = False
     if a == 385 and ((b > 385 and b < 525) or (b > 525 and b < 665)):
+        right = False
+    if a == 455 and (b == 315):
         right = False
     if a == 525 and ((b > 175 and b < 385) or (b > 385 and b < 455) or (b > 455 and b <595) or (b > 595 and b < 665)) :
         right = False
